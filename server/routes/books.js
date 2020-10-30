@@ -9,7 +9,7 @@ let book = require('../models/books');
 /* GET books List page. READ */
 router.get('/', (req, res, next) => {
   // find all books in the books collection
-  book.find( (err, books) => {
+  book.find( (err, BookList) => {
     if (err) {
       return console.error(err);
     }
@@ -64,8 +64,8 @@ router.get('/:id', (req, res, next) => {
     }
     else
     {
-      res.render('books/details', {title: 'Edit', book: bookToEdit, 
-      displayName: req.user ? req.user.displayName : ''})
+      res.render('books/edit', {title: 'Edit', book: bookToEdit, 
+      })
     }
   });
 });

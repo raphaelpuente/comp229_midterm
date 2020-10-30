@@ -10,7 +10,7 @@ let book = require('../models/books');
 router.get('/', (req, res, next) => {
   res.render('content/index', {
     title: 'Home',
-    books: ''
+    books: 'books'
    });
 });
 
@@ -21,6 +21,24 @@ router.get('/', (req, res, next) => {
 router.get('/books', (req, res, next) => {
   res.render('books/index', {
     title: 'books',
+    books: 'books'
+   });
+});
+
+
+/* GET add page. wildcard */
+router.get('/add', (req, res, next) => {
+  res.render('books/add', {
+    title: 'Add',
+    books: 'books'
+   });
+});
+
+
+/* GET edit page. wildcard */
+router.get('/edit', (req, res, next) => {
+  res.render('books/edit', {
+    title: 'Edit',
     books: 'books'
    });
 });
