@@ -4,13 +4,15 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
+//let cors = require('cors');
 
 // import "mongoose" - required for DB Access
 let mongoose = require('mongoose');
 // URI
 let DB = require('./db');
 
-mongoose.connect(process.env.URI || DB.URI, {useNewUrlParser: true, useUnifiedTopology: true});
+//mongoose.connect(process.env.URI || DB.URI, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(DB.URI, {useNewUrlParser: true, useUnifiedTopology: true}); 
 
 let mongoDB = mongoose.connection;
 mongoDB.on('error', console.error.bind(console, 'Connection Error:'));
@@ -34,12 +36,13 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../../client')));
+app.use(express.static(path.join(__dirname, '../../client'))); //equivalente a public 
+app.use(express.static(path.join(__dirname, '../../node_modules'))); //quiza deba ir
 
 
 // route redirects
-app.use('/', index);
-app.use('/books', books);
+app.use('/', index); //si lo cambio a /books crashea
+app.use('/books', books); //checar bien esta parte
 
 
 // catch 404 and forward to error handler

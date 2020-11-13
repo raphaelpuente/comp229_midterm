@@ -1,46 +1,19 @@
 // modules required for routing
 let express = require('express');
 let router = express.Router();
-let mongoose = require('mongoose');
+//let mongoose = require('mongoose');
 
 // define the game model
-let book = require('../models/books');
+//let book = require('../models/books');
+let indexController = require('../controllers/index');
 
 /* GET home page. wildcard */
-router.get('/', (req, res, next) => {
-  res.render('content/index', {
-    title: 'Home',
-    books: 'books'
-   });
-});
+router.get('/', indexController.displayHomePage);
 
-
-/* This wasn't part of the assignment but needed to be fixed, in order to get the book page working */
+/* GET home page. wildcard */
+router.get('/home', indexController.displayHomePage);
 
 /* GET books page. wildcard */
-router.get('/books', (req, res, next) => {
-  res.render('books/index', {
-    title: 'books',
-    books: 'books'
-   });
-});
-
-
-/* GET add page. wildcard */
-router.get('/add', (req, res, next) => {
-  res.render('books/add', {
-    title: 'Add',
-    books: 'books'
-   });
-});
-
-
-/* GET edit page. wildcard */
-router.get('/edit', (req, res, next) => {
-  res.render('books/edit', {
-    title: 'Edit',
-    books: 'books'
-   });
-});
+router.get('/books', indexController.displayBooksPage);
 
 module.exports = router;
